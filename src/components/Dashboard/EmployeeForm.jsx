@@ -3,7 +3,7 @@ import { validateEmployee } from '../../utils/validation';
 
 export default function EmployeeForm({ employee, onSave, onCancel }) {
   const [formData, setFormData] = useState({
-    id: employee?.id||'',
+    id: employee?.id || '',
     fullName: employee?.fullName || '',
     gender: employee?.gender || 'Male',
     dob: employee?.dob || '',
@@ -26,19 +26,20 @@ export default function EmployeeForm({ employee, onSave, onCancel }) {
     });
   };
 
-const handleImageChange = (e) => {
-  const file = e.target.files[0];
-  if (file) {
-    const reader = new FileReader();
-    reader.onloadend = () => {
-      const base64String = reader.result;
-      setFormData({ ...formData, imageUrl: base64String });
-      setImagePreview(base64String);
-    };
-    reader.readAsDataURL(file);
-     e.target.value = '';
-  }
-};
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result;
+        setFormData({ ...formData, imageUrl: base64String });
+        setImagePreview(base64String);
+      };
+      reader.readAsDataURL(file);
+    }
+    // Reset input so user can re-select same file
+    e.target.value = '';
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -51,7 +52,7 @@ const handleImageChange = (e) => {
 
   return (
     <div className="form-modal">
-    <h3 style={{ marginBottom: '16px' }}>{employee ? 'Edit Employee' : 'Add Employee'}</h3>
+      <h3 style={{ marginBottom: '16px' }}>{employee ? 'Edit Employee' : 'Add Employee'}</h3>
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
         <div>
           <input
@@ -111,11 +112,39 @@ const handleImageChange = (e) => {
           </label>
         </div>
 
+        {/* Image Upload & Preview */}
         <div>
-          <input type="file" accept="image/*" onChange={handleImageChange} />
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            style={{ marginBottom: '8px' }}
+          />
           {imagePreview && (
-            <div style={{ marginTop: '10px' }}>
-              <img src={imagePreview} alt="Preview" style={{ width: '100px', height: '100px', objectFit: 'cover', borderRadius: '8px' }} />
+            <div style={{ marginTop: '10px', display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <img
+                src={imagePreview}
+                alt="Preview"
+                style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '8px' }}
+              />
+              <button
+                type="button"
+                onClick={() => {
+                  setImagePreview('');
+                  setFormData({ ...formData, imageUrl: '' });
+                }}
+                style={{
+                  padding: '4px 8px',
+                  backgroundColor: '#ef4444',
+                  color: 'white',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  fontSize: '12px'
+                }}
+              >
+                Remove Image
+              </button>
             </div>
           )}
         </div>
@@ -136,7 +165,7 @@ const handleImageChange = (e) => {
           </button>
         </div>
       </form>
-  </div>
+    </div>
   );
 }
 

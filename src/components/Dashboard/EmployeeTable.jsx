@@ -11,10 +11,9 @@ export default function EmployeeTable({ onEmployeeChange }) {
 
   useEffect(() => {
     const data = getEmployees();
-    console.log(data)
     setEmployees(data);
-    if (onEmployeeChange) onEmployeeChange(data); // 🔥 Notify parent (Dashboard) of change
-  }, []);
+    if (onEmployeeChange) onEmployeeChange(data);
+  }, [onEmployeeChange]);
 
   const filtered = employees.filter(emp => {
     const matchesSearch = emp.fullName.toLowerCase().includes(searchTerm.toLowerCase());

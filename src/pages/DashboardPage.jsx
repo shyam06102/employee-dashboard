@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useCallback } from 'react';
 import { useAuth } from '../context/AuthContext';
 import SummaryCard from '../components/Dashboard/SummaryCard';
 import EmployeeTable from '../components/Dashboard/EmployeeTable';
@@ -6,6 +6,10 @@ import EmployeeTable from '../components/Dashboard/EmployeeTable';
 export default function DashboardPage() {
   const { logout } = useAuth();
   const [employees, setEmployees] = useState([]);
+
+  const handleEmployeeChange = useCallback((updatedEmployees) => {
+    setEmployees(updatedEmployees);
+  }, []);
 
   const handleLogout = () => {
     if (window.confirm('Are you sure you want to log out?')) {
@@ -22,7 +26,7 @@ export default function DashboardPage() {
         </button>
       </div>
       <SummaryCard employees={employees} />
-      <EmployeeTable onEmployeeChange={setEmployees} />
+      <EmployeeTable onEmployeeChange={handleEmployeeChange} />
     </div>
   );
 }
