@@ -8,7 +8,7 @@ import DashboardPage from './pages/DashboardPage';
 export default function App() {
   return (
     <BrowserRouter>
-      <AuthProvider> {/* ✅ Must be INSIDE BrowserRouter */}
+      <AuthProvider>
         <Routes>
           <Route path="/" element={<LoginPage />} />
           <Route

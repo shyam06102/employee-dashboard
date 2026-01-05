@@ -1,8 +1,10 @@
 # 📋 Employee Management Dashboard — Detailed README
 
 A modern, feature-rich **Employee Management Dashboard** built with **React.js**, designed for assignments, portfolios, or demo purposes. Includes authentication, CRUD operations, real-time filtering, image upload, and print functionality — all with a clean, responsive UI.
+
+Live Url: https://raspy-rain-f952.shyamsha06012002.workers.dev/
 ![Login Page](image.png)
-![Dashboard Page](image-1.png)
+![Dashboard Page](image-2.png)
 ---
 
 ## 🌟 Features
@@ -44,7 +46,7 @@ A modern, feature-rich **Employee Management Dashboard** built with **React.js**
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/your-username/employee-dashboard.git
+   git clone https://github.com/Shyam06102/employee-dashboard.git
    cd employee-dashboard
    ```
 
